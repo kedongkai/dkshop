@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
 
 namespace SportsStore.Domain.Entities
 {
 	public class Product
 	{
+		[Key]
 		[HiddenInput(DisplayValue = false)]
 		public int ProductID { get; set; }
 
@@ -19,7 +21,11 @@ namespace SportsStore.Domain.Entities
 		[Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive price")]
 		public decimal Price { get; set; }
 
-		[Required(ErrorMessage = "Please specify a category")]
-		public string Category { get; set; }
+		[Column("Category")]
+		public int CategoryId { get; set; }
+
+		//[Required(ErrorMessage = "Please specify a category")]
+		//[ForeignKey("CategoryId")]
+		public virtual ProductCategory Category { get; set; }
 	}
 }

@@ -1,20 +1,20 @@
-﻿@model IEnumerable<string>
+﻿@model IEnumerable<SportsStore.Domain.Entities.ProductCategory>
 
 @Html.ActionLink("Home", "List", "Product", null, new { @class = "btn btn-block btn-default btn-lg" })
 
-@foreach (var link in Model)
+@foreach (var category in Model)
 {
-    @Html.RouteLink(link,
+    @Html.RouteLink(category.Name,
         new
         {
             controller = "Product",
             action = "List",
-            category = link,
+            category = category.CategoryID,
             page = 1
         },
         new
         {
             @class = "btn btn-block btn-default btn-lg"
-                + (link == ViewBag.SelectedCategory ? " btn-primary" : "")
+                + (category.CategoryID == ViewBag.SelectedCategory ? " btn-primary" : "")
         })
 }
